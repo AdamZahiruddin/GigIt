@@ -9,6 +9,11 @@ form{
     margin: 0 auto;
 }
 
+#title{
+    text-decoration: none;
+    color: black;
+}
+
 .contain-input{
     width: 100%;
     display: flex;
@@ -76,4 +81,26 @@ form{
 
 #create-part2[value='unactive']{
     display: none;
+}
+
+#contain-all-posts{
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 1rem 1rem;
+}
+
+.contain-post{
+    width: 90%;
+    background-color: grey;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.contain-info{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

@@ -10,6 +10,33 @@
 <body>
     <?php
         include('nav.php');
+        require('connect.php');
+
+        $email = $_SESSION['email'];
+        $result = $conn->query("SELECT * FROM employer WHERE email = '$email'");
+        $user = $result->fetch_assoc();
+        
+        if(isset($_POST['contactOwner'])){
+            $title = $_POST['title'];
+            $desc = $_POST['gigDesc'];
+            $salary = $_POST['salary'];
+            $location = $_POST['location'];
+            $date = $_POST['date'];
+            $contact = $_POST['contactOwner'];
+            $userid = $user['EmployerID'];
+            $postType = $_POST['postType'];
+            $time = new DateTime("now", new DateTimeZone('Asia/Kuala_Lumpur'));
+            $timeFormatted = $time->format('H:i:s');
+
+            $sql = "INSERT INTO post (EmployerID, title, description, date, time, contactOwner, location, salary, type, status) VALUES ('$userid', '$title', '$desc', '$date', '$timeFormatted', '$contact', '$location', '$salary', '$postType', 'Ongoing')";
+            
+            if($conn->query($sql)){
+                header("Location: home.php");
+            }
+            else{
+                echo 'Post create failed!';
+            }
+        }
     ?>
     <form action="create.php" method="post" id="form-create">
         <h2>Create Post</h2>
@@ -37,13 +64,20 @@
                 <input type="date" name="date" id="date" required>
             </div>
             <div class="contain-input">
-                <label for="contact">Contact: </label>
-                <input type="text" name="contact" id="contact" required>
+                <label for="contactOwner">Contact: </label>
+                <input type="tel" name="contactOwner" id="contactOwner" required>
+            </div>
+            <div class="contain-input">
+                <label for="postType">Type: </label>
+                <input type="radio" name="postType" id="postPerson" value="Personal" checked>
+                Personal
+                <input type="radio" name="postType" id="postCommunity" value="Community">
+                Community
             </div>
         </div>
         <div id="contain-btn-posts">
-            <button type="submit" id="btn-create" value="unactive">Create Post</button>
             <button type="button" id="btn-next">Next</button>
+            <button type="submit" id="btn-create" value="unactive">Create Post</button>
         </div>
     </form>
 </body>
