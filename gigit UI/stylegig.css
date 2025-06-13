@@ -11,6 +11,11 @@ body {
   background-color: #6b92b9;
 }
 
+.lightmode {
+  background: url("Images/Gigit background white.png") repeat;
+  background-color: #f0f0f0;
+}
+
 .mid-section {
   display: flex;
   flex-direction: column;
@@ -21,7 +26,34 @@ body {
 * {
   box-sizing: border-box;
 }
+/*sidebar styles*/
+.sidebar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #3e5872;
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 10%;
+}
 
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.sidebar a:hover {
+  background-color: #1b314e;
+  transition: background-color 0.3s ease;
+}
 h1 {
   margin-bottom: 40px;
   color: rgb(59, 59, 59);
@@ -37,13 +69,7 @@ label {
   font-weight: bold;
 }
 
-input {
-  width: 95%;
-  padding: 8px;
-  margin-top: 5px;
-  border-radius: 5px;
-  border: 1px solid #fffbfb;
-}
+
 
 .bluebutton {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -68,10 +94,13 @@ input {
   top: 20px;
   left: 20px;
   color: white;
-  font-size: 16px;
+  font-size: 30px;
   font-weight: bold;
 }
 
+.light {
+  color: black;
+}
 .links {
   color: #4a90e2;
   text-decoration: none;
@@ -84,7 +113,6 @@ input {
   color: #357ab8;
   transition: color 0.3s ease;
 }
-
 
 .loginform {
   width: 100%;
@@ -99,7 +127,6 @@ input {
   text-align: center;
   align-items: center;
   width: 500px;
-  
 }
 
 /* Input styles */
@@ -109,8 +136,9 @@ input {
 }
 .contain-input label {
   position: absolute;
-  top: -10px;
+  top: -15px;
   left: 10px;
+  
   background: white;
   padding: 0 5px;
   font-size: 14px;
@@ -120,6 +148,7 @@ input {
 }
 .contain-input input[type="text"],
 .contain-input input[type="tel"],
+.contain-input input[type="email"],
 .contain-input input[type="password"] {
   width: 100%;
   padding: 12px 10px;
@@ -127,12 +156,10 @@ input {
   border: 2px solid #aaa;
   border-radius: 5px;
   outline: none;
+  
 }
 
-.input-group input:focus + label,
-.input-group input:not(:placeholder-shown) + label {
-  color: #007bff;
-}
+
 .contain-radio {
   color: #555;
   display: inline;
@@ -170,6 +197,7 @@ input {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
+  width: 175px;
 }
 #contain-buttons button[type="reset"] {
   background: #f5faff;

@@ -1,0 +1,42 @@
+.sprofileform {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: none;
+  border-radius: 8px;
+}
+
+
+
+.profile-pic-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  background-color: #3e5872;
+  text-align: center;
+   
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 3px solid #2f80ed;
+}
+
+.upload-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #2196f3;
+  color: white;
+  border-radius: 50%;
+  padding: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 2px solid white;
+}
