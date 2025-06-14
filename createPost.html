@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Post - GigIt</title>
+  <link rel="stylesheet" href="stylegig.css">
+
+  <style>
+  
+  </style>
+</head>
+<body class="lightmode">
+  
+  <nav class="sidebar">
+    <div class="logo light">GigIt</div>
+    <a href="home.html">Home</a>
+    <a href="Recents.php">Recently Posted</a>
+    <a href="Foryou.html">For you</a>
+    <a href="trending.html">Trending Gigs</a>
+  </nav>
+
+  <div class="top-bar">
+    <div class="search-notify-container">
+      <form class="search-bar" action="search.html" method="get">
+        <input type="text" id="searchinput" name="search" placeholder="Search...">
+        <button id="searchsubmit" type="submit">
+          <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" width="20" height="20">
+        </button>
+      </form>
+      <button class="notification-btn">
+        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" alt="Notifications" width="24" height="24">
+        <span class="notification-badge">0</span>
+      </button>
+    </div>
+  </div>
+    
+  <div class="mid-section">
+    <h2 class="post-title">Create Post</h2>
+    <div class="container post-container">
+      
+      <form>
+        <div class="form-group">
+          <label for="gig-title">Gig Title:</label>
+          <input type="text" id="gig-title"required>
+        </div>
+        <div class="form-group">
+          <label for="gig-description">Gig Description:</label>
+          <textarea id="gig-description" rows="6"required></textarea>
+        </div>
+        <button type="submit" class="bluebutton post-next-btn">Next</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
