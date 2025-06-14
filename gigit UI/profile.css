@@ -1,20 +1,16 @@
 .sprofileform {
-
   max-width: 600px;
-  margin: auto;
+  margin: 50px auto;
   padding: 20px;
   background-color: none;
   border-radius: 8px;
-  margin-top: 500px;
 }
-
 
 .profile-pic-container {
   position: relative;
   width: 250px;
   height: 250px;
   margin-bottom: 20px;
-  
 }
 
 .profile-pic {
@@ -47,21 +43,49 @@
   height: 16px;
 }
 
-.portfolio{
+.portfolio {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .portfolio-header {
+  width: 100%;
   font-size: 24px;
-  margin-bottom: 10px;
+  padding-bottom: 20px;
+
+  padding-left: 20px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  color: #333;
+  font-weight: bold;
+  text-align: left;
 }
 
-.portfolio-item {
+.portfolio-items {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  width: 100%;
+  height: 500px;
+  justify-content: center;
+}
+
+.portfolio-item {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.portfolio-items img {
+  width: 120px;
+  height: 120px;
+
+  transition: width 0.3s, height 0.3s;
+  cursor: pointer;
+}
+
+.portfolio-item.uploaded img {
+  width: 100%;
+  height: auto;
 }
