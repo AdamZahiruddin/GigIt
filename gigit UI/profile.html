@@ -16,7 +16,7 @@
             <a href="index.html">Home</a>
             <a href="profile.html">Profile</a>
             <a href="signin.html">Sign In</a>
-            <a href="signup.html">Sign Up</a>
+            <a href="index.html">Sign Up</a>
 
         </nav>
     </header>
@@ -26,10 +26,10 @@
         <div class="sprofileform">
             <h1>Profile</h1>
 
-            <!-- profile pciture -->
+
 
             <form action="profile.html" method="post">
-                <div class="profile-pic-container">
+                <!-- <div class="profile-pic-container">
                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Default Avatar"
                         class="profile-pic">
 
@@ -37,29 +37,84 @@
                         📷
                     </label>
                     <input type="file" id="upload-photo" style="display: none;">
+                </div> -->
+                <div class="profile-pic-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Default Avatar"
+                        class="profile-pic">
+
+                    <label for="upload-photo" class="upload-btn">
+                        <img src="https://cdn-icons-png.flaticon.com/512/747/747545.png" alt="Upload" />
+                    </label>
+                    <input type="file" id="upload-photo" style="display: none;">
                 </div>
                 <div class="container">
                     <p class="subtext" style="text-align: left;">Update your profile details here</p>
                     <div class="contain-input">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" required />
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required
+                            placeholder="Enter your name for others to refer to you...." />
                     </div>
                     <div class="contain-input">
                         <label for="email">Email</label>
-                        <input type="email" id="email" required />
+                        <input type="email" id="email" required placeholder="example@gmail.com" />
                     </div>
                     <div class="contain-input">
                         <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" required />
+                        <input type="tel" id="phone" required placeholder="+6012345678" />
                     </div>
-                    <div id="contain-buttons">
-                        <button type="reset">Clear</button>
-                        <button type="submit">Update Profile</button>
+
+                    <div class="contain-input age-input">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" min="0" max="120" placeholder="Enter your age" required />
+                    </div>
+
+                    <div class="contain-input">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Enter your location..." required />
+                        <div class="contain-input">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" rows="4" cols="50" placeholder="Tell us about yourself..."></textarea>
+                        </div>
+                        <div id="contain-buttons">
+                            <button type="reset">Clear</button>
+                            <button type="submit">Update Profile</button>
+                        </div>
+
                     </div>
                 </div>
             </form>
         </div>
+            <article class="container portfolio">
+
+        <div class="portfolio-header">
+            <h2>Portfolio</h2>
+            <p class="subtext">Showcase your work or projects here</p>
+        </div>
+        <div class="portfolio-items">
+            <!-- Portfolio items will be added here -->
+            <p>No portfolio items yet. Add some to showcase your work!</p>
+        </div>
+        <div class="portfolio-actions">
+            <button class="add-portfolio-btn">Add Portfolio Item</button>
+
+        </div>
+
+    </article>
     </div>
+
+
+    <script>
+        document.getElementById('upload-photo').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.querySelector('.profile-pic').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
 
 </html>
