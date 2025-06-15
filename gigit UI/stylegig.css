@@ -7,11 +7,13 @@ body {
   margin: 0;
   background: url("Images/Gigit background dark.png") repeat;
   background-color: #6b92b9;
+ 
 }
 
 .lightmode {
   background: url("Images/Gigit background white.png") repeat;
   background-color: #f0f0f0;
+  
 }
 
 .mid-section {
@@ -320,4 +322,15 @@ textarea {
 
 .blue {
   color: #3e5872;
+}
+
+.center{
+  text-align: center;
+}
+
+.center-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
