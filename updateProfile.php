@@ -38,7 +38,11 @@
             </form>
             <div>
 
-            <?php include ("notification.php");?>
+            <?php
+            
+                include("notification.php");
+         
+            ?>
         </div>
 
     </div>
@@ -152,10 +156,6 @@
             });
 
         });
-
-
-
-
 
     </script>
 </body>
