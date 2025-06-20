@@ -1,0 +1,301 @@
+.create-container {
+  background: #b3d3f6;
+  padding: 2.5vw 2vw;
+  border-radius: 2vw;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.10);
+  width: 60vw;            /* Responsive width */
+  max-width: 1100px;      /* Prevents it from getting too wide */
+  min-width: 320px;       /* Prevents it from getting too small */
+  min-height: 40vh;       /* Responsive height */
+  margin: 2vw 0 0 24vw;   /* Responsive left margin */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2vw;
+}
+
+.post-container{
+  background: #b3d3f6;
+  padding: 2.5vw 2vw;
+  border-radius: 2vw;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.10);
+  width: 60vw;            /* Responsive width */
+  max-width: 1100px;      /* Prevents it from getting too wide */
+  min-width: 320px;       /* Prevents it from getting too small */
+  min-height: 40vh;       /* Responsive height */
+  margin: 10vw 0 0 24vw;   /* Responsive left margin */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2vw;
+}
+
+.post-containers{
+  background: #b3d3f6;
+  padding: 2.5vw 2vw;
+  border-radius: 2vw;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.10);
+  width: 60vw;            /* Responsive width */
+  height: 30vh;
+  max-width: 1100px;      /* Prevents it from getting too wide */
+  min-width: 320px;       /* Prevents it from getting too small */
+  min-height: 20vh;       /* Responsive height */
+  margin: 2vw 0 0 24vw;   /* Responsive left margin */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2vw;
+}
+
+.details-container {
+  padding: 2.5vw 2vw;
+  border-radius: 2vw;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.10);
+  width: 60vw;            /* Responsive width */
+  max-width: 1100px;      /* Prevents it from getting too wide */
+  min-width: 320px;       /* Prevents it from getting too small */
+  min-height: 40vh;       /* Responsive height */
+  margin: 2vw 0 0 24vw;   /* Responsive left margin */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2vw;
+}
+
+.map-container {
+  margin: 2vw 0 0 36vw;
+  display: flex;
+  justify-content: center;
+}
+
+.applicant-container{
+  background: #b3d3f6;
+  padding: 2.5vw 2vw;
+  border-radius: 2vw;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.10);
+  width: 60vw;            /* Responsive width */
+  height: 80vh;
+  max-width: 1100px;      /* Prevents it from getting too wide */
+  min-width: 320px;       /* Prevents it from getting too small */
+  min-height: 20vh;       /* Responsive height */
+  margin: 10vw 0 0 24vw;   /* Responsive left margin */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2vw;
+}
+
+.applicant-containers{
+  background: #b3d3f6;
+  padding: 2.5vw 2vw;
+  border-radius: 2vw;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.10);
+  width: 60vw;            /* Responsive width */
+  height: 20vh;
+  max-width: 1100px;      /* Prevents it from getting too wide */
+  min-width: 320px;       /* Prevents it from getting too small */
+  min-height: 20vh;       /* Responsive height */
+  margin: 2vw 0 0 24vw;   /* Responsive left margin */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2vw;
+}
+
+
+.form-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+}
+
+.post-content{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+}
+
+.form-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 2vw;
+}
+
+.form-label {
+  font-weight: bold;
+  width: 180px;         /* Fixed width for alignment */
+  min-width: 180px;
+  text-align: left;
+  padding-top: 0.5em;
+  font-size: 1.1rem;    /* Use rem for consistent sizing */
+}
+
+.text-box {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  font-size: 1.1vw;
+  color: #222;
+  background-color: #fff;
+  border-radius: 1.2vw;
+  border: none;
+  padding: 1vw 1.5vw;
+  box-sizing: border-box;
+  margin-bottom: 0.5vw;
+  font-family: inherit;
+  box-shadow: none;
+}
+
+#gig-title.text-box {
+  font-weight: bold;
+}
+
+textarea.text-box {
+  min-height: 12vw;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 2vw;
+}
+
+.btn-create {
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 1.2vw;
+  padding: 1vw 3vw;
+  font-size: 1.1vw;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: none;
+  margin-top: 2vw;
+}
+
+.btn-applicant {
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 2vw;
+  padding: 2vw 2vw;
+  font-size: 1.1vw;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: none;
+  margin-top: 2vw;
+}
+
+.btn-applicants {
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 2vw;
+  padding: 1vw 3vw;
+  font-size: 1.1vw;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: none;
+  margin-top: 2vw;
+}
+
+.mid-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.create-title {
+  margin-left: 420px;   
+  margin-top: 150px;     
+  margin-bottom: 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.radio-group {
+  display: flex;
+  gap: 3vw;
+  align-items: center;
+  height: 100%;
+}
+
+.radio-label {
+  font-size: 1.1vw;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+}
+
+
+.details-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.details-label {
+  font-weight: bold;
+  min-width: 110px;
+  color: #222;
+  margin-right: 12px;
+  border-radius: 6px;
+  padding: 2px 8px;
+  display: inline-block;
+}
+
+.details-value {
+  color: #222;
+  font-weight: normal;
+  word-break: break-word;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 2vw;
+  gap: 2vw;
+}
+
+.publisher-box {
+  display: flex;
+  align-items: center;
+  gap: 14vw;
+}
+
+.publisher-box .imgProfile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5vw;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+}
+
+
+
+

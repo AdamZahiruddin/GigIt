@@ -7,19 +7,21 @@ body {
   margin: 0;
   background: url("Images/Gigit background dark.png") repeat;
   background-color: #6b92b9;
+ 
 }
 
 .lightmode {
   background: url("Images/Gigit background white.png") repeat;
   background-color: #f0f0f0;
+  
 }
 
 .mid-section {
-  margin-left: 350px; /* adjust as needed to align with sidebar */
-  margin-top: 120px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* left align */
+  justify-content: center;
+  align-items: center;
+
   height: 100%;
 }
 
@@ -168,7 +170,7 @@ label {
 /* Form styles */
 
 .container {
-  background: #6b92b9;
+  background: white;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -322,66 +324,13 @@ textarea {
   color: #3e5872;
 }
 
-/* Container styling for Create Post */
-.post-container {
-  background: #b3cbe6;
-  border-radius: 18px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
-  padding: 32px 40px 32px 40px;
-  width: 600px;
-  min-width: 350px;
+.center{
+  text-align: center;
 }
 
-/* Title styling */
-.post-title {
-  margin-top: 0;
-  margin-bottom: 24px;
-  text-align: left;
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: #222;
-}
-
-/* Form group styling */
-.form-group {
+.center-items {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  margin-bottom: 24px;
-}
-
-/* Label styling */
-.form-group label {
-  font-weight: bold;
-  color: #222;
-  margin-bottom: 8px;
-  font-size: 1.1rem;
-}
-
-/* Input and textarea styling */
-.form-group input[type="text"],
-.form-group textarea {
-  border: none;
-  border-radius: 12px;
-  padding: 14px 18px;
-  font-size: 1rem;
-  background: #fff;
-  margin-bottom: 0;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  resize: none;
-}
-
-.form-group textarea {
-  min-height: 120px;
-}
-
-/* Next button styling */
-.post-next-btn {
-  float: right;
-  background: #fff;
-  color: #222;
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 10px 32px;
-  margin-top: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
