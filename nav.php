@@ -1,27 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylegig.css">
     <title>GigIt</title>
+    <style>
+        .logout{
+            position: absolute;
+            top: 60px;
+            left: 30px;
+        }
+    </style>
 </head>
+
 <body>
-    <?php 
-        session_start();
-        echo "
+    <?php
+
+
+    //get usertype from database to session
+    
+    $_SESSION['userType'] = 1; // This should be set based on the logged-in user's type
+    //test for usertype 1
+    echo "
             <header>
-                <h1><a href='home.php' id='title'>GigIt</a></h1>
+                <div class='logo light'>GigIt</div>
+                <a class='logout' href='./logout.php'>Logout</a>
             </header>
         ";
-        if($_SESSION['userType'] == 1){
-            echo "
-                <nav id='navigation-bar'>
-                    <a href=''>View Post</a>
-                    <a href=''>Apply Gig</a>
+    if ($_SESSION['userType'] == 1) {
+        echo "
+                <nav class='sidebar'>
+                    <a href='home.php'>Home</a>
+                    <a href='employeeprofile.php'>Profile</a>
+
                 </nav>
             ";
-        }
-        else{
+    } else {
         echo "
                 <nav id='navigation-bar'>
                     <a href='create.php'>Create Post</a>
@@ -29,8 +45,9 @@
                     <a href=''>View Application</a>
                 </nav>
             ";
-        }
+    }
     ?>
-    <a href="./logout.php">Logout</a>
+    
 </body>
+
 </html>

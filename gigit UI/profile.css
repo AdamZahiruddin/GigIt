@@ -158,7 +158,7 @@ textarea::placeholder {
   font-style: italic;
 }
 
-#age {
+.age-view {
   width: 20%;
   text-align: center;
 }

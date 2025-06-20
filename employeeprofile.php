@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+flush(); ?>
 
 <head>
     <meta charset="UTF-8">
@@ -10,19 +13,9 @@
 </head>
 
 <body class="lightmode">
-    <div class="logo light">GigIt</div>
+
     <header>
-
-
-
-        <nav class="sidebar">
-
-            <a href="home.php">Home</a>
-            <a href="profile.php">Profile</a>
-            <a href="signin.html">Sign In</a>
-            <a href="index.html">Sign Up</a>
-
-        </nav>
+        <?php include("nav.php"); ?>
     </header>
     <div class="top-bar">
 
@@ -41,8 +34,8 @@
 
                 <?php
 
-                include("notification.php");
-
+                //include("notification.php");
+                
                 ?>
             </div>
 
@@ -60,8 +53,10 @@
 
                 $userId = isset($_GET['id']) ? intval($_GET['id']) : 1; // Default to 1
                 
-                $sql = "SELECT * FROM user_profiles WHERE id = $userId";
-                $result = $conn->query($sql);
+                $stmt = $conn->prepare("SELECT * FROM user_profiles WHERE id = ?");
+                $stmt->bind_param("i", $userId);
+                $stmt->execute();
+                $result = $stmt->get_result();
 
                 if ($result && $result->num_rows > 0) {
                     $row = $result->fetch_assoc();
@@ -71,16 +66,27 @@
                     $age = $row['age'];
                     $location = $row['location'];
                     $bio = $row['bio'];
+                    
                     // echo into HTML here
                 } else {
                     echo "User not found.";
                 }
+                $stmt->close();
                 ?>
 
                 <h1>Profile</h1>
                 <div class="profile-pic-container">
-                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Default Avatar"
-                        class="profile-pic">
+                    <?php
+                    $defaultAvatarPath = 'https://cdn-icons-png.flaticon.com/512/149/149071.png'; // default profile pic
+                    
+                    if (!empty($row['profile_pic']) && file_exists($row['profile_pic'])) {
+                        $picturePath = $row['profile_pic'];
+                    } else {
+                        $picturePath = $defaultAvatarPath;
+                    }
+                    ?>
+                    <img class="profile-pic imgcenter" src="<?php echo htmlspecialchars($picturePath); ?>"
+                        alt="Profile Picture">
                 </div>
                 <div class="container">
                     <p class="subtext" style="text-align: left;">Here are your profile details:</p>
@@ -99,7 +105,7 @@
                     </div>
                     <div class="contain-input age-view">
                         <label>Age</label>
-                        <p id="age"><?php echo $age ?></p>
+                        <p style="text-align: center;" id="age"><?php echo $age ?></p>
                     </div>
                     <div class="contain-input">
                         <label>Location</label>
@@ -109,9 +115,19 @@
                         <label>Bio</label>
                         <p id="bio"><?php echo $bio ?></p>
                     </div>
+                    <?php
+                    $_SESSION['id'] = 1; // Simulating a logged-in user for demonstration
+                    // Check if the user is logged in and matches the profile being viewed
+                    if (isset($_SESSION['id']) && $_SESSION['id'] == $userId) {
+                        echo '<div  id="contain-buttons">';
+                        echo '<button class="edit-profile-btn" onclick="window.location.href=\'profileform.php\'">Edit Profile</button>';
+                        echo '</div>';
+                    }
+                    ?>
+
                 </div>
             </div>
-            <article class="container portfolio">
+            <!-- <article class="container portfolio">
 
                 <div class="portfolio-header">
                     <h2 style="margin: 10px 0;">Portfolio</h2>
@@ -126,8 +142,10 @@
                     <button class="add-portfolio-btn">Add Portfolio Item</button>
 
                 </div>
-            </article>
+            </article> -->
         </div>
+
+        <?php include("footer.php"); ?>
 
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
