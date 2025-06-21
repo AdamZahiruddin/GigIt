@@ -38,4 +38,6 @@
             echo "The email address you entered does not exist in our records.";
         }
     }
+
+    $connect->close(); // Close the database connection
 ?>
