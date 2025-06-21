@@ -14,5 +14,5 @@
         // Checks if the connection failed so stops the script and print error
     }
     // If Successful
-    echo "Connected Succesfully to the database<br>"; // Use <br> cant use \n because this is HTML output
+    //echo "Connected Succesfully to the database<br>"; // Use <br> cant use \n because this is HTML output
 ?>
