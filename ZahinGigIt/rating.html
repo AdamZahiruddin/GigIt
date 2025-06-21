@@ -18,6 +18,7 @@
             <a>Recently Posted</a>
             <a>For You</a>
             <a>Trending Gigs</a>
+            <a href="listUser.html">Rating</a>
             <a href="logout.php">Logout</a>
         </nav>
     </header>
@@ -52,7 +53,7 @@
 
             <h1>Rating</h1>
                 <div class="container">
-                    <form action="profile.html" method="post">
+                    <form action="feedback.html" method="POST">
                         <div class="profile-pic-container">
                             <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Default Avatar" class="profile-pic">
                         </div>
@@ -62,21 +63,22 @@
                         <div class="rating-css">
 
                             <div class="star-icon">
-                                <input type = "radio" name="rating1" id="rating1">
+                                <input type = "radio" name="rating" id="rating1" value="1">
                                 <label for="rating1" class="fa fa-star"></label>
-                                <input type = "radio" name="rating1" id="rating2">
+                                <input type = "radio" name="rating" id="rating2" value="2">
                                 <label for="rating2" class="fa fa-star"></label>
-                                <input type = "radio" name="rating1" id="rating3">
+                                <input type = "radio" name="rating" id="rating3" value="3">
                                 <label for="rating3" class="fa fa-star"></label>
-                                <input type = "radio" name="rating1" id="rating4">
+                                <input type = "radio" name="rating" id="rating4" value="4">
                                 <label for="rating4" class="fa fa-star"></label>
-                                <input type = "radio" name="rating1" id="rating5">
+                                <input type = "radio" name="rating" id="rating5" value="5">
                                 <label for="rating5" class="fa fa-star"></label>
                             </div>
                         </div>
 
                         <div id="contain-buttons">
-                            <button type="reset">Cancel</button>
+                            <!-- window.location.href = 'changes current page to other page'-->
+                            <button type="button" onclick="window.location.href='listUser.html'">Cancel</button>
                             <button type="submit">Submit</button>
                         </div>
                     </form>
