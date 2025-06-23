@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,9 @@
   </style>
 </head>
 <body class="lightmode">
+
+
+
   
   <nav class="sidebar">
     <div class="logo light">GigIt</div>
@@ -22,7 +26,7 @@
 
   <div class="top-bar">
     <div class="search-notify-container">
-      <form class="search-bar" action="search.html" method="get">
+      <form class="search-bar" action="search.php" method="get">
         <input type="text" id="searchinput" name="search" placeholder="Search...">
         <button id="searchsubmit" type="submit">
           <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" width="20" height="20">
@@ -39,17 +43,17 @@
     <h2 class="create-title">Create Post</h2>
       <div class="create-container">
         <div class="form-content">
-          <form action="">
+          <form action="createDetails.php" method="post">
             <div class="form-row">
             <label class="form-label" for="gig-title">Gig Title:</label>
-            <input class="text-box" id="gig-title" type="text" />
+            <input class="text-box" id="gig-title" name = "title" type="text" />
           </div>
           <div class="form-row">
             <label class="form-label" for="gig-desc">Gig Description:</label>
-            <textarea class="text-box" id="gig-desc"></textarea>
+            <textarea class="text-box" id="gig-desc" name="description"></textarea>
           </div>
           <div class="form-actions">
-            <button class="btn-create">Next</button>
+            <button class="btn-next" type="submit">Next</button>
           </div>
           </form>
         </div>
