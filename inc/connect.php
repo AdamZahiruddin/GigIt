@@ -1,7 +1,7 @@
 <?php
     $servername = "localhost";  // Sets database server address (usually "localhost" for local development)
     $username = "root";         // Sets database username (default is XAMPP is "root")
-    $password = "1234";         // Sets database password ("1234" is used)
+    $password = "";         // Sets database password ("1234" is used)
     $dbname = "gigit";          // Sets name of the database to connect to ("gigit")
 
     // Create connection
