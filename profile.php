@@ -51,26 +51,46 @@ flush(); ?>
                 session_start();
                 include("connect.php");
 
-                $userId = isset($_GET['id']) ? intval($_GET['id']) : 1; // Default to 1
+                // Get user ID from URL or session
+                if (isset($_GET['id'])) {
+                    $userId = $_GET['id'];
+                } elseif (isset($_SESSION['user_id'])) {
+                    $userId = $_SESSION['user_id'];
+                } else {
+                    echo "No user specified.";
+                    exit;
+                }
+
+                // Check user type from ID prefix
+                $prefix = strtoupper(substr($userId, 0, 1)); // Get first character
                 
-                $stmt = $conn->prepare("SELECT * FROM user_profiles WHERE id = ?");
-                $stmt->bind_param("i", $userId);
+                if ($prefix === 'E') {
+                    $table = 'employee_profiles';
+                } elseif ($prefix === 'R') {
+                    $table = 'employer_profiles';
+                } else {
+                    echo "Invalid user ID format.";
+                    exit;
+                }
+
+                // Fetch profile from the correct table
+                $stmt = $conn->prepare("SELECT * FROM $table WHERE id = ?");
+                $stmt->bind_param("s", $userId);
                 $stmt->execute();
                 $result = $stmt->get_result();
 
                 if ($result && $result->num_rows > 0) {
                     $row = $result->fetch_assoc();
-                    $name = $row['name'];
-                    $email = $row['email'];
-                    $phone = $row['phone'];
-                    $age = $row['age'];
-                    $location = $row['location'];
-                    $bio = $row['bio'];
-                    
-                    // echo into HTML here
+
+                    echo "<h2>" . ($prefix === 'E' ? "Employee" : "Employer") . " Profile</h2>";
+                    echo "<p>Name: " . $row['name'] . "</p>";
+                    echo "<p>Email: " . $row['email'] . "</p>";
+                    echo "<p>Phone: " . $row['phone'] . "</p>";
+                    // Add more fields as needed
                 } else {
-                    echo "User not found.";
+                    echo "User profile not found.";
                 }
+
                 $stmt->close();
                 ?>
 

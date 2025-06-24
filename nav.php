@@ -33,7 +33,7 @@
         echo "
                 <nav class='sidebar'>
                     <a href='home.php'>Home</a>
-                    <a href='employeeprofile.php'>Profile</a>
+                    <a href='profile.php'>Profile</a>
 
                 </nav>
             ";
