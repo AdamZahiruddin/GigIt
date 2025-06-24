@@ -22,7 +22,8 @@
             $user = $result->fetch_assoc(); // Fetch the data row
             // Guna password_verify untuk semak kata laluan
             if(password_verify($input_password, $user['password'])){
-                include("listUser.html"); // MUST CHANGE THIS TO MAIN PAGE !!!!!
+                header("Location: managePosts.php"); // MUST CHANGE THIS TO MAIN PAGE !!!!!
+                exit;
             }
             else{
                 echo "Login Failed: Incorrect password.";

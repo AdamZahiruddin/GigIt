@@ -1,3 +1,21 @@
+<?php
+session_start();
+require("inc/connect.php");
+
+if (!isset($_SESSION['username'])) {
+    echo "You must be logged in to view this page.";
+    exit;
+}
+
+$username = $_SESSION['username'];
+
+$sql = "SELECT * FROM post WHERE publisher = ?";
+$stmt = $connect->prepare($sql);
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +23,6 @@
   <title>Manage Posts - GigIt</title>
   <link rel="stylesheet" href="stylegig.css">
   <link rel="stylesheet" href="stylePost.css">
-
-  <style>
-  
-  </style>
 </head>
 <body class="lightmode">
   
@@ -37,15 +51,20 @@
     
   <div class="mid-section">
     <h2 class="create-title">Manage Posts</h2>
-      <div class="post-containers">
-       
-      </div>
-      <div class="post-containers">
-       
-      </div>
-      <div class="post-containers">
-       
-      </div>
+
+    <?php if ($result->num_rows > 0): ?>
+      <?php while ($post = $result->fetch_assoc()): ?>
+        <div class="post-containers">
+          <h3><?= htmlspecialchars($post['title']) ?></h3>
+          <p><?= htmlspecialchars($post['description']) ?></p>
+          <p><strong>Date:</strong> <?= htmlspecialchars($post['date']) ?></p>
+          <p><strong>Wage:</strong> <?= htmlspecialchars($post['wages']) ?></p>
+          <a href="viewPost.php?postID=<?= $post['postID'] ?>">View</a>
+        </div>
+      <?php endwhile; ?>
+    <?php else: ?>
+      <p>No posts found.</p>
+    <?php endif; ?>
   </div>
 </body>
 </html>
