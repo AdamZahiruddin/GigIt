@@ -51,23 +51,16 @@ flush(); ?>
                 session_start();
                 include("connect.php");
 
-                // Get user ID from URL or session
-                if (isset($_GET['id'])) {
-                    $userId = $_GET['id'];
-                } elseif (isset($_SESSION['user_id'])) {
-                    $userId = $_SESSION['user_id'];
-                } else {
-                    echo "No user specified.";
-                    exit;
-                }
+                // Use 'E1' as the test user ID
+                $userId = "E1";
 
                 // Check user type from ID prefix
                 $prefix = strtoupper(substr($userId, 0, 1)); // Get first character
-                
+
                 if ($prefix === 'E') {
-                    $table = 'employee_profiles';
+                    $table = 'employee';
                 } elseif ($prefix === 'R') {
-                    $table = 'employer_profiles';
+                    $table = 'employers';
                 } else {
                     echo "Invalid user ID format.";
                     exit;
@@ -82,13 +75,16 @@ flush(); ?>
                 if ($result && $result->num_rows > 0) {
                     $row = $result->fetch_assoc();
 
-                    echo "<h2>" . ($prefix === 'E' ? "Employee" : "Employer") . " Profile</h2>";
-                    echo "<p>Name: " . $row['name'] . "</p>";
-                    echo "<p>Email: " . $row['email'] . "</p>";
-                    echo "<p>Phone: " . $row['phone'] . "</p>";
-                    // Add more fields as needed
+                    $name = isset($row['name']) ? $row['name'] : '';
+                    $email = isset($row['email']) ? $row['email'] : '';
+                    $phone = isset($row['phone']) ? $row['phone'] : '';
+                    $age = isset($row['age']) ? $row['age'] : '';
+                    $location = isset($row['location']) ? $row['location'] : '';
+                    $bio = isset($row['bio']) ? $row['bio'] : '';
+
                 } else {
                     echo "User profile not found.";
+                    exit;
                 }
 
                 $stmt->close();
@@ -147,22 +143,13 @@ flush(); ?>
 
                 </div>
             </div>
-            <!-- <article class="container portfolio">
+            <?php
+            if ($prefix === 'E') {
+                include('portfolio.php');
+            }
 
-                <div class="portfolio-header">
-                    <h2 style="margin: 10px 0;">Portfolio</h2>
-                    <p class="subtext">Showcase your work or projects here</p>
-                </div>
-                <div class="portfolio-items">
-                    <img src="https://cdn-icons-png.flaticon.com/512/149/149022.png" alt="Default Portfolio Item"
-                        class="portfolio-item">
-                    <p class="subtext bold blue">No portfolio items yet. Add some to showcase your work!</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="add-portfolio-btn">Add Portfolio Item</button>
+            ?>
 
-                </div>
-            </article> -->
         </div>
 
         <?php include("footer.php"); ?>
