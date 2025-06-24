@@ -10,6 +10,14 @@ flush(); ?>
 
     <link rel="stylesheet" href="gigit UI/stylegig.css">
     <link rel="stylesheet" href="gigit UI/profile.css">
+    <style>
+        .emptydetails {
+            color: grey;
+            font-family: 'Courier New', Courier, monospace;
+            font-style: italic;
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body class="lightmode">
@@ -34,8 +42,8 @@ flush(); ?>
 
                 <?php
 
-                //include("notification.php");
-                
+                include("notification.php");
+
                 ?>
             </div>
 
@@ -53,10 +61,11 @@ flush(); ?>
 
                 // Use 'E1' as the test user ID
                 $userId = "E1";
+                $_SESSION['id']= $userId;
 
                 // Check user type from ID prefix
                 $prefix = strtoupper(substr($userId, 0, 1)); // Get first character
-
+                
                 if ($prefix === 'E') {
                     $table = 'employee';
                 } elseif ($prefix === 'R') {
@@ -103,36 +112,82 @@ flush(); ?>
                     ?>
                     <img class="profile-pic imgcenter" src="<?php echo htmlspecialchars($picturePath); ?>"
                         alt="Profile Picture">
-                </div>
-                <div class="container">
-                    <p class="subtext" style="text-align: left;">Here are your profile details:</p>
 
-                    <div class="contain-input">
+                    <p id="name"><?php echo "<h1>" . ucwords($name) . "</h1>"; ?></p>
+                </div>
+                <div class="prfcontainer">
+                    <p class="subtext" style="text-align: left;">Here are your profile details:</p>
+                    <table class="profile-input">
+                        <tr>
+                            <td><label>Name</label></td>
+                            <td>
+                                <p id="name"><?php echo $name; ?></p>
+                            </td>
+                        </tr>
+                        <tr class="age-view">
+                            <td><label>Age</label></td>
+                            <td>
+                                <p style="text-align: center;" id="age"><?php echo $age ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Email</label></td>
+                            <td>
+                                <p id="email"><?php echo $email ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Phone Number</label></td>
+                            <td>
+                                <p id="phone"><?php echo $phone ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Location</label></td>
+                            <td>
+                                <p id="location">
+                                    <?php echo !empty($location) ? $location : '<span class="emptydetails">No location provided</span>'; ?>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Bio</label></td>
+                            <td>
+                                <p id="bio">
+                                    <?php echo !empty($bio) ? $bio : '<span class="emptydetails">No bio provided</span>' ?>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- <div  >
                         <label>Name</label>
-                        <p id="name"><?php echo $name; ?></p>
+                        <p id="name"><?php //echo $name; ?></p>
                     </div>
-                    <div class="contain-input">
-                        <label>Email</label>
-                        <p id="email"><?php echo $email ?></p>
-                    </div>
-                    <div class="contain-input">
-                        <label>Phone Number</label>
-                        <p id="phone"><?php echo $phone ?></p>
-                    </div>
-                    <div class="contain-input age-view">
+                    <div class="profile-input age-view">
                         <label>Age</label>
-                        <p style="text-align: center;" id="age"><?php echo $age ?></p>
+                        <p style="text-align: center;" id="age"><?php //echo $age ?></p>
                     </div>
-                    <div class="contain-input">
+                    <div  >
+                        <label>Email</label>
+                        <p id="email"><?php //echo $email ?></p>
+                    </div>
+                    <div  >
+                        <label>Phone Number</label>
+                        <p id="phone"><?php //echo $phone ?></p>
+                    </div>
+
+                    <div  >
                         <label>Location</label>
-                        <p id="location"><?php echo $location ?></p>
+                        <p id="location" style="text-align: center;">
+                            <?php //echo !empty($location) ? $location : '<span class="emptydetails">No location provided</span>'; ?>
+                        </p>
                     </div>
-                    <div class="contain-input">
+                    <div  >
                         <label>Bio</label>
-                        <p id="bio"><?php echo $bio ?></p>
-                    </div>
+                        <p id="bio"><?php //echo $bio ?></p>
+                    </div> -->
                     <?php
-                    $_SESSION['id'] = 1; // Simulating a logged-in user for demonstration
+                    $_SESSION['id'] = "E1"; // Simulating a logged-in user for demonstration
                     // Check if the user is logged in and matches the profile being viewed
                     if (isset($_SESSION['id']) && $_SESSION['id'] == $userId) {
                         echo '<div  id="contain-buttons">';

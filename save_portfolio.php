@@ -1,5 +1,7 @@
 <?php
+$_SESSION['id'] = "E1";
 session_start();
+
 include("connect.php");
 
 if (!isset($_SESSION['id'])) {
@@ -9,12 +11,18 @@ if (!isset($_SESSION['id'])) {
 $userId = $_SESSION['id'];
 
 if (isset($_FILES['portfolio_image']) && $_FILES['portfolio_image']['error'] == 0) {
-    $uploadDir = 'uploads/';
+    $uploadDir = 'uploads/portfolio/';
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true); // creates folder if it doesn't exist
+    }
+
     $filePath = $uploadDir . basename($_FILES['portfolio_image']['name']);
     move_uploaded_file($_FILES['portfolio_image']['tmp_name'], $filePath);
+    $pfID = 'P' . uniqid();
 
-    $stmt = $conn->prepare("INSERT INTO portfolio (user_id, image_url) VALUES (?, ?)");
-    $stmt->bind_param("is", $userId, $filePath);
+    $stmt = $conn->prepare("INSERT INTO portfolio (pfID, employeeID, pfPicture, pfDesc, pfTitle) VALUES (?, ?, ?,? , ?)");
+    $stmt->bind_param("sssss", $pfID, $userId, $filePath);
     $stmt->execute();
 }
 
