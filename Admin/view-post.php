@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GigIt</title>
-<<<<<<< Updated upstream
     <link rel="stylesheet" href="./style.css">
-=======
-    <link rel="stylesheet" type="text/css" href="./styling/style.css">
->>>>>>> Stashed changes
 </head>
 
 <body>
@@ -17,7 +13,7 @@
     ?>
     <h1 class="header-text">Manage Posts</h1>
     <?php
-        require("inc/connect.php");
+        require("./connect.php");
 
         echo "<div class='contain-contents'>";
         $result = $conn->query("SELECT * FROM post, user WHERE post.userID = user.user_id");
