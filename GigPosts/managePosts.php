@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete_postID'])) {
   $stmt->close();
 
   // Redirect to rating page with employeeID
-  header("Location: /Gigit/Rating/rating.php?employeeID=" . urlencode($employeeID));
+  header("Location: ../Rating/rating.php?employeeID=" . urlencode($employeeID));
   exit;
 }
 
@@ -77,7 +77,15 @@ $result = $stmt->get_result();
               <?= nl2br(htmlspecialchars($post['description'])) ?>
             </div>
             <div class="post-actions" style="display: flex; justify-content: flex-end;">
-              <?php if (!empty($post['employeeID']) && $post['status'] !== 'Completed'): ?>
+              <?php if ($post['status'] === 'Completed'): ?>
+                <button class="complete-btn" disabled
+                  style="background: #ccc; color: #fff; border: none; padding: 6px 14px; border-radius: 5px; cursor: not-allowed;">
+                  Mark as Completed
+                </button>
+                <span style="color:green; margin-left:8px;">Already completed</span>
+                <a class="edit-btn" style="pointer-events:none; opacity:0.5; margin-left:8px;">Edit</a>
+                <a class="delete-btn" style="pointer-events:none; opacity:0.5; margin-left:8px;">Delete</a>
+              <?php elseif (!empty($post['employeeID'])): ?>
                 <form method="post" style="display:inline;">
                   <input type="hidden" name="complete_postID" value="<?= $post['postID'] ?>">
                   <button type="submit" class="complete-btn"
@@ -85,22 +93,19 @@ $result = $stmt->get_result();
                     Mark as Completed
                   </button>
                 </form>
-              <?php elseif ($post['status'] === 'Completed'): ?>
-                <button class="complete-btn" disabled
-                  style="background: #ccc; color: #fff; border: none; padding: 6px 14px; border-radius: 5px; cursor: not-allowed;">
-                  Mark as Completed
-                </button>
-                <span style="color:green; margin-left:8px;">Already completed</span>
+                <a href="editPost.php?postID=<?= $post['postID'] ?>" class="edit-btn" style="margin-left:8px;">Edit</a>
+                <a href="deletePost.php?postID=<?= $post['postID'] ?>" class="delete-btn"
+                  onclick="return confirm('Are you sure you want to delete this post?');" style="margin-left:8px;">Delete</a>
               <?php else: ?>
                 <button class="complete-btn" disabled
                   style="background: #ccc; color: #fff; border: none; padding: 6px 14px; border-radius: 5px; cursor: not-allowed;">
                   Mark as Completed
                 </button>
                 <span style="color:#e67e22; margin-left:8px;">Assign an employee first</span>
+                <a href="editPost.php?postID=<?= $post['postID'] ?>" class="edit-btn" style="margin-left:8px;">Edit</a>
+                <a href="deletePost.php?postID=<?= $post['postID'] ?>" class="delete-btn"
+                  onclick="return confirm('Are you sure you want to delete this post?');" style="margin-left:8px;">Delete</a>
               <?php endif; ?>
-              <a href="editPost.php?postID=<?= $post['postID'] ?>" class="edit-btn">Edit</a>
-              <a href="deletePost.php?postID=<?= $post['postID'] ?>" class="delete-btn"
-                onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
             </div>
           </div>
         <?php endwhile; ?>

@@ -27,7 +27,7 @@ if (isset($_POST['salary'], $_POST['location'], $_POST['date'], $_POST['gig-type
                 VALUES ('$title','$description', '$salary', '$location', '$date','$type', '$employerID', 'In-Progress', '$contact')";
         if ($connect->query($sql) === TRUE) {
             echo "New record created successfully";
-            echo "<meta http-equiv='refresh' content='3;URL=managePosts.php'>";
+            echo "<meta http-equiv='refresh' content='2;URL=managePosts.php'>";
         } else {
             echo "Error: " . $connect->error;
         }
@@ -43,8 +43,8 @@ if (isset($_POST['salary'], $_POST['location'], $_POST['date'], $_POST['gig-type
 <head>
   <meta charset="UTF-8">
   <title>Create Post - GigIt</title>
-  <link rel="stylesheet" href="./styling/stylegig.css">
-  <link rel="stylesheet" href="./styling/stylePost.css">
+  <link rel="stylesheet" href="../styling/stylegig.css">
+  <link rel="stylesheet" href="../styling/stylePost.css">
 
   <style>
   

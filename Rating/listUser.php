@@ -8,7 +8,7 @@
 
     $employees = [];
     if ($employerID) {
-        // Get employees with accepted applications for gigs posted by this employer // Distinct only once
+        // Get employees with accepted applications for gigs posted by this employer
         $sql = "SELECT DISTINCT e.name, e.profile_pic, e.employeeID
                 FROM application a
                 JOIN post p ON a.postID = p.postID

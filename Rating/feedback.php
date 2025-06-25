@@ -4,30 +4,32 @@ include("../topbar.php");
 include("../inc/connect.php");
 
 $success = false;
-$fail = false; // Add this
-$details = [];
+$error = ''; // Add this
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['submit']) || isset($_POST['skip']))) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $employeeID = $_POST['employeeID'] ?? '';
     $employerID = $_POST['employerID'] ?? ($_SESSION['employerID'] ?? '');
     $rateStar = $_POST['rating'] ?? '';
     $feedback = trim($_POST['feedback'] ?? '');
 
     if ($employeeID && $employerID && $rateStar) {
-        $stmt = $connect->prepare("INSERT INTO rating (rateStar, feedback, toEmployee, fromEmployer) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("isss", $rateStar, $feedback, $employeeID, $employerID);
-        $success = $stmt->execute();
-        $stmt->close();
+        if ($feedback === '') {
+            $error = "Feedback cannot be empty.";
+        } else {
+            $stmt = $connect->prepare("INSERT INTO rating (rateStar, feedback, toEmployee, fromEmployer) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("isss", $rateStar, $feedback, $employeeID, $employerID);
+            $success = $stmt->execute();
+            $stmt->close();
 
-        $details = [
-            'rateStar' => $rateStar,
-            'feedback' => $feedback,
-            'toEmployee' => $employeeID,
-            'fromEmployer' => $employerID
-        ];
-        if (!$success) $fail = true;
+            $details = [
+                'rateStar' => $rateStar,
+                'feedback' => $feedback,
+                'toEmployee' => $employeeID,
+                'fromEmployer' => $employerID
+            ];
+        }
     } else {
-        $fail = true; // Set fail if required fields are missing
+        $error = "Failed to submit. Please fill in all required fields.";
     }
 }
 ?>
@@ -58,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (isset($_POST['submit']) || isset($
                     <meta http-equiv='refresh' content='1;URL=listUser.php'>
                 <?php else: ?>
                     <h2 style="text-align: center;">Give Feedback?</h2>
-                    <?php if ($fail): ?>
-                        <p style="color: red; text-align: center;">Failed to submit. Please fill in all required fields especially if you not click star.</p>
+                    <?php if (!empty($error)): ?>
+                        <p style="color: red; text-align: center;"><?= htmlspecialchars($error) ?></p>
                         <meta http-equiv='refresh' content='2;URL=listUser.php'>
-                    <?php endif; ?>
+                        <?php endif; ?>
                     <form action="" method="POST">
                         <input type="hidden" name="employeeID" value="<?= htmlspecialchars($_POST['employeeID'] ?? '') ?>">
                         <input type="hidden" name="employerID" value="<?= htmlspecialchars($_POST['employerID'] ?? ($_SESSION['employerID'] ?? '')) ?>">
