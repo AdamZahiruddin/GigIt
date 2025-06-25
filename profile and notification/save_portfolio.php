@@ -7,6 +7,8 @@ include("connect.php");
 if (!isset($_SESSION['id'])) {
     die("Not logged in");
 }
+$pfDesc= $_POST['portfolio_caption'];
+$pfTitle = $_POST['portfolio_title'];
 
 $userId = $_SESSION['id'];
 
@@ -22,7 +24,7 @@ if (isset($_FILES['portfolio_image']) && $_FILES['portfolio_image']['error'] == 
     $pfID = 'P' . uniqid();
 
     $stmt = $conn->prepare("INSERT INTO portfolio (pfID, employeeID, pfPicture, pfDesc, pfTitle) VALUES (?, ?, ?,? , ?)");
-    $stmt->bind_param("sssss", $pfID, $userId, $filePath);
+    $stmt->bind_param("sssss", $pfID, $userId, $filePath,$pfDesc, $pfTitle);
     $stmt->execute();
 }
 

@@ -8,7 +8,7 @@ flush(); ?>
     <meta charset="UTF-8">
     <title>GigIt Profile</title>
 
-    <link rel="stylesheet" href="gigit UI/stylegigger.css">
+    <link rel="stylesheet" href="gigit UI/stylegig.css">
     <link rel="stylesheet" href="gigit UI/profile.css">
     <style>
         .emptydetails {
