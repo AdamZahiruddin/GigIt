@@ -27,8 +27,8 @@ $result = $stmt->get_result();
 <head>
   <meta charset="UTF-8">
   <title>My Pending Requests - GigIt</title>
-  <link rel="stylesheet" href="../stylegig.css">
-  <link rel="stylesheet" href="../stylePost.css">
+  <link rel="stylesheet" href="../styling/stylegig.css">
+  <link rel="stylesheet" href="../styling/stylePost.css">
 </head>
 <body class="lightmode">
   <div class="mid-section">

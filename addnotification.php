@@ -1,33 +1,30 @@
 <?php
 // add_notification.php - using mysqli
 
-include 'connect.php'; // Include your mysqli database connection
+include '../inc/connect.php'; // Include your mysqli database connection
 
 /**
  * Adds a new notification to the database.
  *
- * @param int $userId The ID of the user to receive the notification.
- * @param string $message The notification message.
- * @param string|null $link Optional link associated with the notification.
- * @return bool True on success, false on failure.
+ * @param string $userId 
+ * @param string $message 
+ * @param string|null $fromUser 
+ * @param string $title
+ * @return bool 
  */
-function addNotification($userId, $message, $link = null) {
-    global $conn; // Use the mysqli connection object from db_connect.php
+function addNotification($userId, $message,$title, $fromUser = null) {
+    global $connect; 
 
-    // Prepare the SQL statement for security against SQL injection
-    $stmt = $conn->prepare("INSERT INTO notifications (toUser, message, link) VALUES (?, ?, ?)");
+   
+    $stmt = $connect->prepare("INSERT INTO notifications (toUser, notiContent, fromUser, notiTitle) VALUES (?, ?, ?, ?)");
 
     if ($stmt === false) {
-        error_log("Failed to prepare statement: " . $conn->error);
+        error_log("Failed to prepare statement: " . $connect->error);
         return false;
     }
 
-    // Bind parameters
-    // 'sis' stands for:
-    // s - string (message)
-    // i - integer (user_id)
-    // s - string (link) - even if null, it's treated as a string type
-    $stmt->bind_param("iss", $userId, $message, $link);
+
+    $stmt->bind_param("ssss", $userId, $message, $fromUser , $title);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -60,4 +57,6 @@ function addNotification($userId, $message, $link = null) {
 //         echo "Error adding notification.";
 //     }
 // }
+
+
 ?>

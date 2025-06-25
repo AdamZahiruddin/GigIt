@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+session_start();
 
 flush(); ?>
 
@@ -8,8 +9,8 @@ flush(); ?>
     <meta charset="UTF-8">
     <title>GigIt Profile</title>
 
-    <link rel="stylesheet" href="gigit UI/stylegigger.css">
-    <link rel="stylesheet" href="gigit UI/profile.css">
+    <link rel="stylesheet" href="../styling/stylegigger.css">
+    <link rel="stylesheet" href="../styling/profile.css">
     <style>
         .emptydetails {
             color: grey;
@@ -23,31 +24,12 @@ flush(); ?>
 <body class="lightmode">
 
     <header>
-        <?php include("nav.php"); ?>
+        <?php include("../nav.php"); ?>
     </header>
-    <div class="top-bar">
+    
 
 
-        <div class="search-notify-container">
-            <form class="search-bar" action="search.html" method="get">
-                <input type="text" placeholder="Search..." id="searchinput" name="search"
-                    style="padding: 6px 10px; border-radius: 4px; border: 1px solid #ccc;">
-                <button id="searchsubmit" type="submit"
-                    style="background: none; border: none; cursor: pointer; margin-left: 4px;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" width="20"
-                        height="20">
-                </button>
-            </form>
-            <div>
-
-                <?php
-
-                include("notification.php");
-
-                ?>
-            </div>
-
-        </div>
+ <?php include("../topbar.php"); ?>
 
         <div class="mid-section">
 
@@ -56,27 +38,26 @@ flush(); ?>
 
             <div class="sprofileform">
                 <?php
-                session_start();
-                include("connect.php");
-
-                // Use 'E1' as the test user ID
-                $userId = "E1";
-                $_SESSION['id']= $userId;
+                include("../inc/connect.php");
+        
+                $userId = $_GET['employerID'] ?? $_GET['employeeID'] ?? $_SESSION['employerID'] ?? $_SESSION['employeeID'];
 
                 // Check user type from ID prefix
                 $prefix = strtoupper(substr($userId, 0, 1)); // Get first character
-                
+
                 if ($prefix === 'E') {
                     $table = 'employee';
+                    $id = 'employeeID';
                 } elseif ($prefix === 'R') {
-                    $table = 'employers';
+                    $table = 'employer';
+                    $id = 'employerID';
                 } else {
                     echo "Invalid user ID format.";
                     exit;
                 }
 
                 // Fetch profile from the correct table
-                $stmt = $conn->prepare("SELECT * FROM $table WHERE id = ?");
+                $stmt = $connect->prepare("SELECT * FROM $table WHERE $id = ?");
                 $stmt->bind_param("s", $userId);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -100,19 +81,22 @@ flush(); ?>
                 ?>
 
                 <h1>Profile</h1>
-                <div class="profile-pic-container">
-                    <?php
-                    $defaultAvatarPath = 'https://cdn-icons-png.flaticon.com/512/149/149071.png'; // default profile pic
-                    
-                    if (!empty($row['profile_pic']) && file_exists($row['profile_pic'])) {
-                        $picturePath = $row['profile_pic'];
-                    } else {
-                        $picturePath = $defaultAvatarPath;
-                    }
-                    ?>
-                    <img class="profile-pic imgcenter" src="<?php echo htmlspecialchars($picturePath); ?>"
-                        alt="Profile Picture">
+                <div style="display: flex; gap: 20px;">
+                    <div class="profile-pic-container">
+                        <?php
+                        $defaultAvatarPath = 'https://cdn-icons-png.flaticon.com/512/149/149071.png'; // default profile pic
+                        
+                        if (!empty($row['profile_pic']) && file_exists($row['profile_pic'])) {
+                            $picturePath = $row['profile_pic'];
+                        } else {
+                            $picturePath = $defaultAvatarPath;
+                        }
+                        ?>
+                        <img class="profile-pic imgcenter" src="<?php echo htmlspecialchars($picturePath); ?>"
+                            alt="Profile Picture">
 
+
+                    </div>
                     <p id="name"><?php echo "<h1>" . ucwords($name) . "</h1>"; ?></p>
                 </div>
                 <div class="prfcontainer">
@@ -127,7 +111,7 @@ flush(); ?>
                         <tr class="age-view">
                             <td><label>Age</label></td>
                             <td>
-                                <p style="text-align: center;" id="age"><?php echo $age ?></p>
+                                <p style="text-align: center;" id="age"><?php echo !empty($age) ? $age : '<span class="emptydetails">No age provided</span>' ?></p>
                             </td>
                         </tr>
                         <tr>
@@ -139,7 +123,7 @@ flush(); ?>
                         <tr>
                             <td><label>Phone Number</label></td>
                             <td>
-                                <p id="phone"><?php echo $phone ?></p>
+                                <p id="phone"><?php echo !empty($phone) ? $phone : '<span class="emptydetails">No phone provided</span>' ?></p>
                             </td>
                         </tr>
                         <tr>
@@ -187,9 +171,9 @@ flush(); ?>
                         <p id="bio"><?php //echo $bio ?></p>
                     </div> -->
                     <?php
-                    $_SESSION['id'] = "E1"; // Simulating a logged-in user for demonstration
+                    //$_SESSION['id'] = "E1"; // Simulating a logged-in user for demonstration
                     // Check if the user is logged in and matches the profile being viewed
-                    if (isset($_SESSION['id']) && $_SESSION['id'] == $userId) {
+                    if (isset($_SESSION[$id]) && $_SESSION[$id] == $userId) {
                         echo '<div  id="contain-buttons">';
                         echo '<button class="edit-profile-btn" onclick="window.location.href=\'profileform.php\'">Edit Profile</button>';
                         echo '</div>';
@@ -207,7 +191,7 @@ flush(); ?>
 
         </div>
 
-        <?php include("footer.php"); ?>
+        <?php include("../footer.php"); ?>
 
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

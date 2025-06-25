@@ -39,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['role'])) {
 <html>
 <head>
     <title>Choose Role</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../stylegig.css">
+    <link rel="stylesheet" href="../styling/style.css">
+    <link rel="stylesheet" href="../styling/stylegig.css">
 
     <style>
         .container

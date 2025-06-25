@@ -30,25 +30,12 @@ if (isset($_GET['postID'])) {
 <head>
   <meta charset="UTF-8">
   <title>View Post - GigIt</title>
-  <link rel="stylesheet" href="../stylegig.css">
-  <link rel="stylesheet" href="../stylePost.css">
+  <link rel="stylesheet" href="../styling/stylegig.css">
+  <link rel="stylesheet" href="../styling/stylePost.css">
 </head>
 
 <body class="lightmode">
-  <div class="top-bar">
-    <div class="search-notify-container">
-      <form class="search-bar" action="searchedPost.php" method="get">
-        <input type="text" id="searchinput" name="name" placeholder="Search..."
-          value="<?= htmlspecialchars($_GET['name'] ?? '') ?>" required>
-        <button id="searchsubmit" type="submit">
-          <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" width="20" height="20">
-        </button>
-      </form>
-      <button class="notification-btn">
-        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" alt="Notifications" width="24" height="24">
-
-      </button>
-    </div>
+  <?php include("../topbar.php");?>
   </div>
 
   <div>
@@ -61,8 +48,10 @@ if (isset($_GET['postID'])) {
         <form class="form-actions" action="">
           <h3>Posted by:</h3>
           <div class="publisher-box">
-            <img class="imgProfile" src="" alt="Profile Picture" />
-            <span class="username"><?= htmlspecialchars($pubname['name'] ?? '') ?></span>
+            <a href="../Profile/profile.php?employerID=<?= urlencode($pubID ?? '') ?>" style="display: flex; align-items: center; text-decoration: none;">
+              <img class="imgProfile" src="" alt="Profile Picture" />
+              <span class="username"><?= htmlspecialchars($pubname['name'] ?? '') ?></span>
+            </a>
           </div>
           <div class="action-buttons">
             <button class="btn-create" type="button" onclick="history.back()">Back</button>

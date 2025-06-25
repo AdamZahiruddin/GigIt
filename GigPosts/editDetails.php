@@ -49,24 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Edit Post - GigIt</title>
-  <link rel="stylesheet" href="../stylegig.css">
-  <link rel="stylesheet" href="../stylePost.css">
+  <link rel="stylesheet" href="../styling/stylegig.css">
+  <link rel="stylesheet" href="../styling/stylePost.css">
 </head>
 <body class="lightmode">
-  <div class="top-bar">
-    <div class="search-notify-container">
-      <form class="search-bar" action="searchedPost.php" method="get">
-        <input type="text" id="searchinput" name="name" placeholder="Search..." value="<?= htmlspecialchars($_GET['name'] ?? '') ?>" required>
-        <button id="searchsubmit" type="submit">
-          <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" width="20" height="20">
-        </button>
-      </form>
-      <button class="notification-btn">
-        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" alt="Notifications" width="24" height="24">
-        <span class="notification-badge">0</span>
-      </button>
-    </div>
-  </div>
+   <?php include("../topbar.php");?>
   <div class="mid-section">
     <h2 class="create-title">Edit Post Details</h2>
     <div class="create-container">

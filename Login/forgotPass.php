@@ -1,5 +1,5 @@
 <?php
-    include('inc/connect.php'); // Include the database connection file
+    include('../inc/connect.php'); // Include the database connection file
 
     $email = $_POST['email'];
     $password = $_POST['password'];

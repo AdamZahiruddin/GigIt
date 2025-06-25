@@ -29,10 +29,11 @@ $stmt->close();
 <head>
   <meta charset="UTF-8">
   <title>My Current Gig - GigIt</title>
-  <link rel="stylesheet" href="../stylegig.css">
-  <link rel="stylesheet" href="../stylePost.css">
+  <link rel="stylesheet" href="../styling/stylegig.css">
+  <link rel="stylesheet" href="../styling/stylePost.css">
 </head>
 <body class="lightmode">
+   <?php include("../topbar.php");?>
   <div class="mid-section">
     <h2 class="create-title">My Current Accepted Gig</h2>
     <?php if ($post): ?>

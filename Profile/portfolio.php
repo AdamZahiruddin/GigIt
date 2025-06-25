@@ -1,12 +1,12 @@
 <?php
-session_start();
-include("connect.php");
 
-$viewedUserId = $_GET['id'] ?? $_SESSION['id'];
-$loggedInUserId = $_SESSION['id'] ?? "E1";
+include("../inc/connect.php");
 
-$stmt = $conn->prepare("SELECT * FROM portfolio WHERE employeeID = ?");
-$stmt->bind_param("i", $viewedUserId);
+$viewedUserId = $_GET['employeeID'] ?? $_SESSION['employeeID'];
+$loggedInUserId = $_SESSION['employeeID'] ;
+
+$stmt = $connect->prepare("SELECT * FROM portfolio WHERE employeeID = ?");
+$stmt->bind_param("s", $viewedUserId);
 $stmt->execute();
 $result = $stmt->get_result();
 $portfolioItems = $result->fetch_all(MYSQLI_ASSOC);

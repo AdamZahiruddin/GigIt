@@ -1,44 +1,43 @@
 <?php
 
-session_start();
-include 'connect.php';
+//session_start();
+include 'inc/connect.php';
 
 
 
 
-$username = $_SESSION['email'] ?? 'guest';
+$username = $_SESSION['employeeID'] ?? $_SESSION['employerID'];
 
-$notificationsHTML = "";
-$notificationError = false;
 
-$notificationCount = 0;
-if (!$notificationError && $result) {
-    $notificationCount = $result->num_rows;
-}
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 
 ?>
 
-<link rel="stylesheet" href="gigit UI/stylegig.css">
+
 <style>
     .notif-dropdown {
         position: absolute;
         top: 40px;
-        /* Adjust based on button height */
         right: 0;
-        padding: 5px 20px;
-        padding-bottom: 20px;
-        width: 300px;
-        min-height: 300px;
-        max-height: 600px;
-        overflow-y: auto;
+        width: 320px;
+        min-height: 120px;
+        max-height: 420px;
         z-index: 1000;
         display: none;
         background: #f9f9f9;
-        
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+        padding: 0;
+        overflow: hidden; /* Hide scrollbars on the dropdown itself */
+    }
 
+    .notif-list {
+        max-height: 350px; /* Adjust as needed */
+        overflow-y: auto;
+        padding: 0 20px 20px 20px;
+        margin: 0;
     }
 
     .flex {
@@ -46,24 +45,19 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         flex-direction: column;
     }
 
-    .flex>* {
-        width: 100%;
-    }
-
     .notif-item {
-        padding: 10px;
+        padding: 12px 0;
         border-bottom: 1px solid #eee;
-
-        height: 100%;
-        flex: 1;
+        background: #fff;
     }
 
     .notiTitle {
         font-size: 20px;
         font-weight: bold;
-        padding: 10px;
+        padding: 16px 20px 8px 20px;
         margin: 0;
         border-bottom: 1px solid #ddd;
+        background: #f3f3f3;
     }
 
     .notif-empty {
@@ -80,20 +74,23 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     }
 </style>
 <button class="notification-btn">
-    <img src="gigit UI/Images/bell.png" alt="Notifications" width="22" height="22">
+    <!-- Emoji -->
+    <span style="font-size:22px;">🔔</span>
+
+    
     <span class="notification-badge"
         style="position: absolute; top: -4px; right: -4px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none; <?= $notificationCount > 0 ? '' : 'display: none;' ?>">0</span>
-
 </button>
 <div id="notifDropdown" class="notif-dropdown container flex center-items">
     <p class="notiTitle">Notifications</p>
-    <div class='notif-item center-items'>
+    <div class="notif-list">
         <?php
 
 
         try {
+            $notificationsHTML = "";
             $sql = "SELECT * FROM notifications WHERE toUser = ? ORDER BY notiTime DESC LIMIT 5";
-            $stmt = $conn->prepare($sql);
+            $stmt = $connect->prepare($sql);
             $stmt->bind_param("s", $username);
             $stmt->execute();
             $result = $stmt->get_result(); // use result from prepared statement

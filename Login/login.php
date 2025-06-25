@@ -36,6 +36,7 @@
         if ($employer && password_verify($input_password, $employer['password'])) {
             $_SESSION['username'] = $employer['name'];
             $_SESSION['employerID'] = $employer['employerID'];
+            $loggedUser = $_SESSION['employerID'];
             header("Location: ../GigPosts/managePosts.php");
             exit;
         }
@@ -44,6 +45,7 @@
         if ($employee && password_verify($input_password, $employee['password'])) {
             $_SESSION['username'] = $employee['name'];
             $_SESSION['employeeID'] = $employee['employeeID'];
+            $loggedUser = $_SESSION['employeeID'];
             header("Location: ../homePage.PHP");
             exit;
         }

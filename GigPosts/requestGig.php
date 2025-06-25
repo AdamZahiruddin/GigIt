@@ -14,7 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['employeeID'])) {
         $stmt = $connect->prepare("INSERT INTO application (requestStatus, employeeID, postID, requestDetails) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssis", $requestStatus, $employeeID, $postID, $requestDetails);
         if ($stmt->execute()) {
-            echo "<script>alert('Request submitted!');window.location='/GigIt/homePage.php';</script>";
+            // Add notification for employer
+            notifyEmployerOnGigRequest($connect, $postID, $employeeID);
+            echo "<script>alert('Request submitted!');window.location='../homePage.php';</script>";
             exit;
         } else {
             echo "<script>alert('Failed to submit request.');</script>";
@@ -24,6 +26,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['employeeID'])) {
         echo "<script>alert('Please enter a message.');</script>";
     }
 }
+
+/**
+ * Notify employer when a gig is requested
+ */
+
+ 
+function notifyEmployerOnGigRequest($connect, $postID, $employeeID) {
+    // Get employerID and post title
+    $employerID = null;
+    $postTitle = null;
+    $stmt = $connect->prepare("SELECT employerID, title FROM post WHERE postID = ?");
+    $stmt->bind_param("i", $postID);
+    $stmt->execute();
+    $stmt->bind_result($employerID, $postTitle);
+    if ($stmt->fetch()) {
+        $stmt->close();
+        // Prepare notification message
+        $message = "You have a new application for your gig: \"$postTitle\".";
+        // Call your notification function (adjust path if needed)
+        include_once("../addnotification.php");
+        addNotification($employerID, $message, "New Gig Application", $employeeID);
+    } else {
+        $stmt->close();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,24 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['employeeID'])) {
 <head>
   <meta charset="UTF-8">
   <title>Request Gig - GigIt</title>
-  <link rel="stylesheet" href="../stylegig.css">
-  <link rel="stylesheet" href="../stylePost.css">
+  <link rel="stylesheet" href="../styling/stylegig.css">
+  <link rel="stylesheet" href="../styling/stylePost.css">
 </head>
 <body class="lightmode">
-  <div class="top-bar">
-    <div class="search-notify-container">
-      <form class="search-bar" action="searchedPost.php" method="get">
-        <input type="text" id="searchinput" name="name" placeholder="Search..." value="<?= htmlspecialchars($_GET['name'] ?? '') ?>" required>
-        <button id="searchsubmit" type="submit">
-          <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" width="20" height="20">
-        </button>
-      </form>
-      <button class="notification-btn">
-        <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" alt="Notifications" width="24" height="24">
-        <span class="notification-badge">0</span>
-      </button>
-    </div>
-  </div>
+   <?php include("../topbar.php");?>
     
   <div class="mid-section">
     <h2 class="create-title">Gig Request</h2>

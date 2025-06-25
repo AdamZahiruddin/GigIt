@@ -1,3 +1,21 @@
+<?php
+session_start();
+include("../inc/connect.php");
+include("../topbar.php");
+
+$employeeID = $_GET['employeeID'] ?? null;
+$emp = null;
+if ($employeeID) {
+    $stmt = $connect->prepare("SELECT name, profile_pic FROM employee WHERE employeeID = ?");
+    $stmt->bind_param("s", $employeeID);
+    $stmt->execute();
+    $stmt->bind_result($name, $profile_pic);
+    if ($stmt->fetch()) {
+        $emp = ['name' => $name, 'profile_pic' => $profile_pic];
+    }
+    $stmt->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,40 +30,8 @@
 
     <div class="logo light">GigIt</div>
     <header>
-        <nav class="sidebar">
-            <a>Home</a>
-            <a>Profile</a>
-            <a>Recently Posted</a>
-            <a>For You</a>
-            <a href="managePosts.php">Manage Posts</a>
-            <a href="listUser.html">Rating</a>
-            <a href="logout.php">Logout</a>
-        </nav>
+        <?php include("../nav.php"); ?>
     </header>
-
-    <!-- Search Bar -->
-    <div class="top-bar">
-
-        <div class="search-notify-container" >
-
-            <form class="search-bar" action="search.html" method="get">
-
-                <input type="text" placeholder="Search..." id="searchinput" name="search" style="padding: 6px 10px; border-radius: 4px; border: 1px solid #ccc;">
-                
-                <button id="searchsubmit" type="submit" style="background: none; border: none; cursor: pointer; margin-left: 4px;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" width="20"
-                        height="20">
-                </button>
-            </form>
-
-            <button class="notification-btn">
-
-                <img src="https://cdn-icons-png.flaticon.com/512/1827/1827392.png" alt="Notifications" width="24" height="24">
-
-                <span class="notification-badge" style="position: absolute; top: -4px; right: -4px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">0</span>
-            </button>
-        </div>
-    </div>
 
     <div class="mid-section">
 
@@ -53,12 +39,14 @@
 
             <h1>Rating</h1>
                 <div class="container">
-                    <form action="feedback.html" method="POST">
+                    <form action="feedback.php" method="POST">
+                        <input type="hidden" name="employeeID" value="<?= htmlspecialchars($employeeID) ?>">
+                        <input type="hidden" name="employerID" value="<?= htmlspecialchars($_SESSION['employerID'] ?? '') ?>">
                         <div class="profile-pic-container">
-                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Default Avatar" class="profile-pic">
+                            <img src="<?= htmlspecialchars($emp['profile_pic'] ?: 'https://cdn-icons-png.flaticon.com/512/149/149071.png') ?>" alt="Avatar" class="profile-pic">
                         </div>
 
-                        <label class="profile-name">Name</label>
+                        <label class="profile-name"><?= htmlspecialchars($emp['name'] ?? 'Name') ?></label>
                         <!-- Make rating by star -->
                         <div class="rating-css">
 
@@ -78,7 +66,7 @@
 
                         <div id="contain-buttons">
                             <!-- window.location.href = 'changes current page to other page'-->
-                            <button type="button" onclick="window.location.href='listUser.html'">Cancel</button>
+                            <button type="button" onclick="window.location.href='listUser.php'">Cancel</button>
                             <button type="submit">Submit</button>
                         </div>
                     </form>
