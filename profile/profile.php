@@ -8,8 +8,8 @@ flush(); ?>
     <meta charset="UTF-8">
     <title>GigIt Profile</title>
 
-    <link rel="stylesheet" href="gigit UI/stylegigger.css">
-    <link rel="stylesheet" href="gigit UI/profile.css">
+    <link rel="stylesheet" href="./gigit UI/stylegigger.css">
+    <link rel="stylesheet" href="gigit UI\stylegigger.css">
     <style>
         .emptydetails {
             color: grey;
@@ -23,7 +23,7 @@ flush(); ?>
 <body class="lightmode">
 
     <header>
-        <?php include("nav.php"); ?>
+        <?php //include("nav.php"); ?>
     </header>
     <div class="top-bar">
 
