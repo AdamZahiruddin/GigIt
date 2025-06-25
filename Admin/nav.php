@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylegig.css">
     <title>GigIt</title>
+    <style>
+        .logout{
+            position: absolute;
+            top: 60px;
+            left: 30px;
+        }
+    </style>
 </head>
+
 <body>
-    <?php 
-        session_start();
-        echo "
+    <?php
+
+
+    //get usertype from database to session
+    
+    $_SESSION['userType'] = 1; // This should be set based on the logged-in user's type
+    //test for usertype 1
+    echo "
             <header>
-                <h1><a href='home.php' id='title'>GigIt</a></h1>
+                <div class='logo light'>GigIt</div>
+                <a class='logout' href='./logout.php'>Logout</a>
             </header>
         ";
+<<<<<<< HEAD:Admin/nav.php
         if($_SESSION['role'] == 0){
             echo "
                 <nav id='navigation-bar'>
@@ -36,6 +53,18 @@
         }
         else{
             echo "
+=======
+    if ($_SESSION['userType'] == 1) {
+        echo "
+                <nav class='sidebar'>
+                    <a href='home.php'>Home</a>
+                    <a href='profile.php'>Profile</a>
+
+                </nav>
+            ";
+    } else {
+        echo "
+>>>>>>> Gigit(profile-and-notifications):nav.php
                 <nav id='navigation-bar'>
                     <a href='create.php'>Create Post</a>
                     <a href=''>Edit Post</a>
@@ -43,7 +72,12 @@
                     <a href='./logout.php'>Logout</a>
                 </nav>
             ";
-        }
+    }
     ?>
+<<<<<<< HEAD:Admin/nav.php
+=======
+    
+>>>>>>> Gigit(profile-and-notifications):nav.php
 </body>
+
 </html>
