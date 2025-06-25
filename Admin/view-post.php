@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GigIt</title>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="./style.css">
+=======
+    <link rel="stylesheet" type="text/css" href="./styling/style.css">
+>>>>>>> Stashed changes
 =======
     <link rel="stylesheet" type="text/css" href="./styling/style.css">
 >>>>>>> Stashed changes
