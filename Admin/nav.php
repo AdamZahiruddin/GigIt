@@ -29,31 +29,6 @@
                 <a class='logout' href='./logout.php'>Logout</a>
             </header>
         ";
-<<<<<<< HEAD:Admin/nav.php
-        if($_SESSION['role'] == 0){
-            echo "
-                <nav id='navigation-bar'>
-                    <a href='./admin.php'>Home</a>
-                    <a href='./view-user.php'>View Users</a>
-                    <a href='./view-post.php'>View Posts</a>
-                    <a href='./view-report.php'>View Reports</a>
-                    <a href='./view-stats.php'>View Statistics</a>
-                    <a href='./logout.php'>Logout</a>
-                </nav>
-            ";
-        }
-        else if($_SESSION['role'] == 1){
-            echo "
-                <nav id='navigation-bar'>
-                    <a href=''>View Post</a>
-                    <a href=''>Apply Gig</a>
-                    <a href='./logout.php'>Logout</a>
-                </nav>
-            ";
-        }
-        else{
-            echo "
-=======
     if ($_SESSION['userType'] == 1) {
         echo "
                 <nav class='sidebar'>
@@ -64,7 +39,6 @@
             ";
     } else {
         echo "
->>>>>>> Gigit(profile-and-notifications):nav.php
                 <nav id='navigation-bar'>
                     <a href='create.php'>Create Post</a>
                     <a href=''>Edit Post</a>
@@ -74,10 +48,7 @@
             ";
     }
     ?>
-<<<<<<< HEAD:Admin/nav.php
-=======
     
->>>>>>> Gigit(profile-and-notifications):nav.php
 </body>
 
 </html>
