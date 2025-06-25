@@ -1,0 +1,91 @@
+.sprofileform {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: none;
+  border-radius: 8px;
+}
+
+.profile-pic-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.upload-btn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 6px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ccc;
+  cursor: pointer;
+}
+
+.upload-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.portfolio-header {
+  width: 100%;
+  font-size: 24px;
+  padding-bottom: 20px;
+
+  padding-left: 20px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  color: #333;
+  font-weight: bold;
+  text-align: left;
+}
+
+.portfolio-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 500px;
+  justify-content: center;
+}
+
+.portfolio-item {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.portfolio-items img {
+  width: 120px;
+  height: 120px;
+
+  transition: width 0.3s, height 0.3s;
+  cursor: pointer;
+}
+
+.portfolio-item.uploaded img {
+  width: 100%;
+  height: auto;
+}

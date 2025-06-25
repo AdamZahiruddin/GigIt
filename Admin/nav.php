@@ -10,7 +10,7 @@
         session_start();
         echo "
             <header>
-                <h1>GigIt</h1>
+                <h1><a href='home.php' id='title'>GigIt</a></h1>
             </header>
         ";
         if($_SESSION['role'] == 0){
