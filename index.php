@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gigit - Login</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylegig.css">
 
     <?php
       // Initialize session
@@ -23,16 +24,16 @@
   <section class = "mid-section">
 
     <div class="logo">GigIt</div>
-      <div class="container">
+      <div class="container" style="margin-top: 10% ">
         <h1>Login</h1>
 
         <p class="subtext" style = "text-align: left;">Sign in into your account</p>
         
-        <form class="loginform" action="login.php" method="POST">
+        <form class="loginform" action="Login/login.php" method="POST">
 
           <div class="contain-input">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Username" required/>
+            <label for="username">Username/email:</label>
+            <input type="text" id="username" name="username" placeholder="Username/email" required/>
           </div>
 
             <div class = "contain-input">
@@ -41,14 +42,14 @@
             </div>
 
             <div class = "forgotPass">
-              <a class="links" style="text-align: left;" href="forgotPass.html">Forgot Password?</a>
+              <a class="links" style="text-align: left;" href="Login/forgotPass.html">Forgot Password?</a>
             </div>
 
             <div class="center-container">
               <button style = 'display: block;' class="bluebutton" type="submit">Login</button>
             </div>  
 
-            <p style = 'display:inline'>Don't have an account?</p><a class="links" href="signup.html">&nbspSign up</a>
+            <p style = 'display:inline'>Don't have an account?</p><a class="links" href="Login/signup.html">&nbspSign up</a>
         
           </form>
     </div>

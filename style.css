@@ -15,14 +15,6 @@ body {
   background-color: #6b92b9;
 }
 
-.mid-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  margin: 118px;
-}
 
 label {
   display: block;

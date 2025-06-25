@@ -5,6 +5,6 @@
         // Destroy the whole session
         $_SESSION = array(); // Clear all session variables
         session_destroy();
-        echo "<meta http-equiv='refresh' content='0;URL=index.php'>"; // Redirect to index page
+        echo "<meta http-equiv='refresh' content='0;URL=../index.php'>"; // Redirect to index page
     }
 ?>

@@ -1,5 +1,5 @@
 <?php
-    include('inc/connect.php'); // Include the database connection file
+    include('../inc/connect.php'); // Include the database connection file
 
     $nm = $_POST['name']; //$_POST is holding the data sent to the server using HTTP POST method, usually from an HTML form
     $phone = $_POST['phone'];
@@ -10,13 +10,35 @@
     // Hash password sebelum simpan ke database
     $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
 
-    // Check if email already exists
-    $check_email_sql = "SELECT * FROM employee WHERE email='$eml' UNION SELECT * FROM employer WHERE email='$eml'";
-    $check_email_result = $connect->query($check_email_sql);
-    if ($check_email_result->num_rows > 0) {
-        echo "Email already exists. Please use a different email.";
-        echo "<meta http-equiv='refresh' content='1;URL=index.php'>";
-        exit; // Stop further execution if email exists
+    // Check if email already exists in employee table
+    $check_employee_sql = "SELECT * FROM employee WHERE email='$eml'";
+    $check_employee_result = $connect->query($check_employee_sql);
+    $employee_exists = ($check_employee_result->num_rows > 0);
+
+    // Check if email already exists in employer table
+    $check_employer_sql = "SELECT * FROM employer WHERE email='$eml'";
+    $check_employer_result = $connect->query($check_employer_sql);
+    $employer_exists = ($check_employer_result->num_rows > 0);
+
+    // If email exists in both tables, stop
+    if ($employee_exists && $employer_exists) {
+        echo "Email already exists as both employee and employer. Please use a different email.";
+        echo "<meta http-equiv='refresh' content='1;URL=../index.php'>";
+        exit;
+    }
+
+    // If trying to register as employee and email exists in employee table, stop
+    if ($typeuser == "employee" && $employee_exists) {
+        echo "Email already exists as employee. Please use a different email.";
+        echo "<meta http-equiv='refresh' content='1;URL=../index.php'>";
+        exit;
+    }
+
+    // If trying to register as employer and email exists in employer table, stop
+    if ($typeuser == "employer" && $employer_exists) {
+        echo "Email already exists as employer. Please use a different email.";
+        echo "<meta http-equiv='refresh' content='1;URL=../index.php'>";
+        exit;
     }
 
     // ID Generate Random
@@ -33,11 +55,11 @@
     if($typeuser == "employee"){
         $idEmployee = "E" . generate_random_number(); // E for Employee
         // Masukkan data ke dalam database
-        $sql = "INSERT INTO employee (id, name, phone, email, password)
+        $sql = "INSERT INTO employee (employeeID, name, phone, email, password)
                 VALUES ('$idEmployee','$nm', '$phone', '$eml', '$hashed_password')";
         if($connect->query($sql) === TRUE){
             echo "New Record Created Successfully";
-            echo "<meta http-equiv='refresh' content='1;URL=index.php'>";
+            echo "<meta http-equiv='refresh' content='1;URL=../index.php'>";
             // Redirect to index.html after 1 seconds
         }
         else{
@@ -47,11 +69,11 @@
     else if($typeuser == "employer"){
         $idEmployer = "R" . generate_random_number(); // R for Employee
         // Masukkan data ke dalam database
-        $sql = "INSERT INTO employer (id, name, phone, email, password)
+        $sql = "INSERT INTO employer (employerID, name, phone, email, password)
                 VALUES ('$idEmployer','$nm', '$phone', '$eml', '$hashed_password')";
         if($connect->query($sql) === TRUE){
             echo "New Record Created Successfully";
-            echo "<meta http-equiv='refresh' content='1;URL=index.php'>";
+            echo "<meta http-equiv='refresh' content='1;URL=../index.php'>";
             // Redirect to index.html after 1 seconds
         }
         else{

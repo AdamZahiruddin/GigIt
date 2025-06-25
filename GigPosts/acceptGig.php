@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Request Gig - GigIt</title>
+  <title>Review Applicant - GigIt</title>
   <link rel="stylesheet" href="stylegig.css">
   <link rel="stylesheet" href="stylePost.css">
 
@@ -22,8 +22,9 @@
 
   <div class="top-bar">
     <div class="search-notify-container">
-      <form class="search-bar" action="search.html" method="get">
-        <input type="text" id="searchinput" name="search" placeholder="Search...">
+      <!-- Reusable Search Bar -->
+      <form class="search-bar" action="searchedPost.php" method="get">
+        <input type="text" id="searchinput" name="name" placeholder="Search..." value="<?= htmlspecialchars($_GET['name'] ?? '') ?>" required>
         <button id="searchsubmit" type="submit">
           <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" width="20" height="20">
         </button>
@@ -36,17 +37,13 @@
   </div>
     
   <div class="mid-section">
-    <h2 class="create-title">Gig Request</h2>
-      <div class="create-container">
+      <div class="applicant-container">
         <div class="form-content">
-            <span class = "req-title">Message:</span>
           <form action="">
-          <div class="form-row">
-            <textarea class="text-box" id="gig-req" placeholder="Write an application message to the employer"></textarea>
-          </div>
-          <div class="form-actions">
-            <button class="btn-create" id = "btn-req">Submit</button>
-          </div>
+            <div class="form-actions">
+              <button class="btn-applicant" id="btn-decline" type="button"></button>
+              <button class="btn-applicant" id="btn-accept" type="submit"></button>
+            </div>
           </form>
         </div>
       </div>

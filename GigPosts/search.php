@@ -1,5 +1,6 @@
 <?php
-    require("connect.php");
+    require("../inc/connect.php");
+
 
     if(isset($_GET['name']))
     {
@@ -7,7 +8,7 @@
 
         $sql = "SELECT * FROM post WHERE LOWER(title) LIKE '%$keyword'";
 
-        $result = $conn->query($sql);
+        $result = $connect->query($sql);
 
     }
 
