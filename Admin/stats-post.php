@@ -10,7 +10,7 @@
 <body>
     <?php
         include("./nav.php");
-        require("./connect.php");
+        require("inc/connect.php");
     ?>
     <h1 class="header-text">View Data: Posts</h1>
     <div class="contain-table">

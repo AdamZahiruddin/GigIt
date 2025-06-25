@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GigIt</title>
-    <link rel="stylesheet" href="./style.css" type="text/css">
+    <link rel="stylesheet" href="./styling/style.css" type="text/css">
 </head>
 <body>
     <?php
         include("./nav.php");
-        require("./connect.php");
+        require("inc/connect.php");
     ?>
     <h1 class="header-text">Statistics</h1>
     <section id="section-stats">
